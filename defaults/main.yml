@@ -1,16 +1,16 @@
 ---
 kubernetes_packages:
-  - name: kubelet
+  - name: kubelet={{ kubernetes_version }}-00
     state: present
-  - name: kubectl
+  - name: kubectl={{ kubernetes_version }}-00
     state: present
-  - name: kubeadm
+  - name: kubeadm={{ kubernetes_version }}-00
     state: present
   - name: kubernetes-cni
     state: present
 
-kubernetes_version: '1.20'
-kubernetes_version_rhel_package: '1.20.4'
+kubernetes_version: '1.23'
+kubernetes_version_rhel_package: '1.23.4'
 
 kubernetes_role: master
 
@@ -30,7 +30,8 @@ kubernetes_pod_network:
 
 kubernetes_kubeadm_kubelet_config_file_path: '/etc/kubernetes/kubeadm-kubelet-config.yaml'
 kubernetes_config_kubelet_configuration:
-  cgroupDriver: "cgroupfs"
+  cgroupDriver: "systemd"
+  #cgroupDriver: "cgroupfs"
 
 kubernetes_config_init_configuration:
   localAPIEndpoint:
